@@ -1,44 +1,58 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
 {
-    public float moveSpeed;
-    public Vector2 moveDirection { get; private set; }
-    private CharacterController charController;
+    private CharacterController controller;
+    private Vector3 playerVelocity;
+    private Vector2 movementInput;
+    private bool isAttacking;
+    [SerializeField]
+    private float playerSpeed = 2.0f;
 
-    private void Awake()
+    private void Start()
     {
-        charController = GetComponent<CharacterController>();
+        controller = gameObject.GetComponent<CharacterController>();
     }
 
-    private void Update()
+    void Update()
     {
-        GatherInputs();
-    }
+        Vector3 move = new Vector3(movementInput.x, movementInput.y, 0);
+        controller.Move(move * Time.deltaTime * playerSpeed);
 
-    private void LateUpdate()
-    {
-        charController.Move(moveDirection * moveSpeed * Time.deltaTime);
-    }
-
-    private void GatherInputs()
-    {
-        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        if (moveInput.magnitude > 1)
+        if (move.magnitude > 1)
         {
-            moveInput = moveInput.normalized;
+            gameObject.transform.forward = move.normalized;
+        }
+        else if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+        }
+        else
+        {
+            //not moving
         }
 
-        moveDirection = moveInput;
+        controller.Move(playerVelocity * Time.deltaTime);
 
-        //add attacks!
+        //undoes rotation caused by movement. player is invisible when rotated
+        transform.eulerAngles = Vector3.zero;
     }
 
-    private Vector2 GetMoveDirection()
+    public void OnMove(InputAction.CallbackContext context)
     {
-        return moveDirection;
+        movementInput = context.ReadValue<Vector2>();
+    }
+    public void OnAttack(InputAction.CallbackContext context) 
+    {
+        isAttacking = context.ReadValue<bool>();
+        isAttacking = context.action.triggered;
+        print("Attack 1");
+    }
+    public void OnAttack2(InputAction.CallbackContext context)
+    {
+        print("Attack 2");
     }
 }
