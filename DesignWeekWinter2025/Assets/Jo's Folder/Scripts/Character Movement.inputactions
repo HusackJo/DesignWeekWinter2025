@@ -35,7 +35,7 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "WASD",
                     "id": "87d3d4bb-89f8-46cd-ae81-53e0485662e8",
                     "path": "2DVector",
                     "interactions": "",
@@ -90,7 +90,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "Gamepad Left Stick",
                     "id": "4acdc035-34c7-4b9c-9e8b-be6ade9fd23a",
                     "path": "2DVector",
                     "interactions": "",

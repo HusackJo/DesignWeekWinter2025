@@ -8,7 +8,7 @@ public class Character : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private Vector2 movementInput;
-    private bool isAttacking;
+    private bool isAttacking, isAttacking2;
     [SerializeField]
     private float playerSpeed = 2.0f;
 
@@ -18,6 +18,11 @@ public class Character : MonoBehaviour
     }
 
     void Update()
+    {
+        DoMovement();
+    }
+
+    public void DoMovement()
     {
         Vector3 move = new Vector3(movementInput.x, movementInput.y, 0);
         controller.Move(move * Time.deltaTime * playerSpeed);
@@ -41,6 +46,15 @@ public class Character : MonoBehaviour
         transform.eulerAngles = Vector3.zero;
     }
 
+    public void DoAttack()
+    {
+        if (isAttacking)
+        {
+            print("do attack");
+            //attack function here
+        }
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
@@ -53,6 +67,8 @@ public class Character : MonoBehaviour
     }
     public void OnAttack2(InputAction.CallbackContext context)
     {
+        isAttacking2 = context.ReadValue<bool>();
+        isAttacking2 = context.action.triggered;
         print("Attack 2");
     }
 }
