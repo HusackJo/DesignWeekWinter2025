@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
 {
+    public Transform attackPoint;
+    public float attackRadius;
+    public LayerMask enemyLayers;
+
     private CharacterController controller;
     private Vector3 playerVelocity;
     private Vector2 movementInput;
@@ -51,7 +55,11 @@ public class Character : MonoBehaviour
         if (isAttacking)
         {
             print("do attack");
-            //attack function here
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
+            foreach(Collider2D enemy in hitEnemies)
+            {
+                print($"we hit: {enemy.name}");
+            }
         }
     }
 
@@ -70,5 +78,11 @@ public class Character : MonoBehaviour
         isAttacking2 = context.ReadValue<bool>();
         isAttacking2 = context.action.triggered;
         print("Attack 2");
+    }
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
     }
 }
