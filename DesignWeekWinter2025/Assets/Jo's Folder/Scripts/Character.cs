@@ -1,24 +1,29 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
 {
-    public Transform attackPoint;
-    public float attackRadius;
-    public LayerMask enemyLayers;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
-    private Vector2 movementInput;
+    private Vector2 movementInput, aimInput;
     private bool isAttacking, isAttacking2;
+    private PlayerInput inputManager;
+    private float aimAngle;
     [SerializeField]
-    private float playerSpeed = 2.0f;
+    public float playerSpeed = 2.0f;
+    public Transform attackPoint;
+    public float attackRadius;
+    public LayerMask enemyLayers;
+    public float attackDelay;
 
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        inputManager = gameObject.GetComponent<PlayerInput>();
     }
 
     void Update()
@@ -46,20 +51,28 @@ public class Character : MonoBehaviour
 
         controller.Move(playerVelocity * Time.deltaTime);
 
+        if (inputManager.currentControlScheme == "Keyboard")
+        {
+            //I'd use aiminput if i was smart, but i decided to make this one a vector3
+            Vector3 aimDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position);
+            aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+        }
+        else if (inputManager.currentControlScheme == "Gamepad")
+        {
+            aimAngle = Mathf.Atan2(aimInput.y, aimInput.x) * Mathf.Rad2Deg - 90f;
+        }
         //undoes rotation caused by movement. player is invisible when rotated
-        transform.eulerAngles = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+        transform.Rotate(0, 0, aimAngle);
     }
 
     public void DoAttack()
     {
-        if (isAttacking)
+        print("did attack");
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
+        foreach (Collider2D enemy in hitEnemies)
         {
-            print("do attack");
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
-            foreach(Collider2D enemy in hitEnemies)
-            {
-                print($"we hit: {enemy.name}");
-            }
+            print($"we hit: {enemy.name}");
         }
     }
 
@@ -69,17 +82,19 @@ public class Character : MonoBehaviour
     }
     public void OnAttack(InputAction.CallbackContext context) 
     {
-        isAttacking = context.ReadValue<bool>();
-        isAttacking = context.action.triggered;
-        print("Attack 1");
+        DoAttack();
     }
     public void OnAttack2(InputAction.CallbackContext context)
     {
-        isAttacking2 = context.ReadValue<bool>();
-        isAttacking2 = context.action.triggered;
-        print("Attack 2");
+        DoAttack();
     }
-    private void OnDrawGizmosSelected()
+
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        aimInput = context.ReadValue<Vector2>();
+    }
+
+    private void OnDrawGizmos()
     {
         if (attackPoint == null)
             return;
