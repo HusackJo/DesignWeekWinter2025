@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
     private Vector3 playerVelocity;
     private Vector2 movementInput, aimInput;
     private bool isAttacking, isAttacking2;
+    private int whatHandShouldAttack = 0;
     private PlayerInput inputManager;
     private float aimAngle;
     [SerializeField]
@@ -19,6 +20,7 @@ public class Character : MonoBehaviour
     public float attackRadius;
     public LayerMask enemyLayers;
     public float attackDelay;
+    private float attacktimer;
 
     private void Start()
     {
@@ -33,6 +35,11 @@ public class Character : MonoBehaviour
 
     public void DoMovement()
     {
+        //
+        
+        //      Movement
+
+        //
         Vector3 move = new Vector3(movementInput.x, movementInput.y, 0);
         controller.Move(move * Time.deltaTime * playerSpeed);
 
@@ -48,9 +55,13 @@ public class Character : MonoBehaviour
         {
             //not moving
         }
-
         controller.Move(playerVelocity * Time.deltaTime);
 
+        //
+
+        //      Aiming
+
+        //
         if (inputManager.currentControlScheme == "Keyboard")
         {
             //I'd use aiminput if i was smart, but i decided to make this one a vector3
@@ -66,13 +77,27 @@ public class Character : MonoBehaviour
         transform.Rotate(0, 0, aimAngle);
     }
 
-    public void DoAttack()
+    public void DoAttack(int whatHandAttacked)
     {
-        print("did attack");
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
-        foreach (Collider2D enemy in hitEnemies)
+        if (whatHandAttacked == whatHandShouldAttack || whatHandShouldAttack == 0)
         {
-            print($"we hit: {enemy.name}");
+            if (Time.time >= attacktimer)
+            {
+                attacktimer = Time.time + 1f / attackDelay;
+                print($"did attack, {attacktimer}");
+                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
+                foreach (Collider2D enemy in hitEnemies)
+                {
+                    print($"we hit: {enemy.name}");
+                }
+            }
+            if (whatHandAttacked == 1)
+            {
+                whatHandShouldAttack = 2;
+            } else if (whatHandAttacked == 2)
+            {
+                whatHandShouldAttack = 1;
+            }
         }
     }
 
@@ -82,11 +107,11 @@ public class Character : MonoBehaviour
     }
     public void OnAttack(InputAction.CallbackContext context) 
     {
-        DoAttack();
+        DoAttack(1);
     }
     public void OnAttack2(InputAction.CallbackContext context)
     {
-        DoAttack();
+        DoAttack(2);
     }
 
     public void OnAim(InputAction.CallbackContext context)
