@@ -21,13 +21,15 @@ public class Character : MonoBehaviour
     public LayerMask enemyLayers;
     public float attackDelay;
     public int attackDamage;
-    private float attacktimer;
+    public float attackTimer;
 
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
         inputManager = gameObject.GetComponent<PlayerInput>();
         animator = gameObject.GetComponent<Animator>();
+        UIManager uIManager = FindObjectOfType<UIManager>().GetComponent<UIManager>();
+        uIManager.SpawnCharacterUI(this);
     }
 
     void Update()
@@ -80,12 +82,12 @@ public class Character : MonoBehaviour
 
     public void DoAttack(int whatHandAttacked)
     {
-        if (Time.time >= attacktimer)
+        if (Time.time >= attackTimer)
         {
             //select hand based on input
             if (whatHandAttacked == whatHandShouldAttack || whatHandShouldAttack == 0)
             {
-                attacktimer = Time.time + 1f / attackDelay;
+                attackTimer = Time.time + 1f / attackDelay;
                 if (whatHandAttacked == 1)
                 {
                     animator.SetBool("DoAttack1", true);
