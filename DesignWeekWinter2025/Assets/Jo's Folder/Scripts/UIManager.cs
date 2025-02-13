@@ -9,8 +9,10 @@ public class UIManager : MonoBehaviour
     private GameManager gameManager;
     public GameObject characterUIRef;
     public Transform characterUIPanel;
-    private int characterCount;
     public GameObject[] playerHearts;
+    public GameObject gameOverPanel;
+    private int characterCount;
+
 
     //yknow what, game comes first. Scrapping this for now
     //I think my problem is with Lists. I'd ask some friends for help, but the school's closed.
@@ -66,8 +68,12 @@ public class UIManager : MonoBehaviour
 
     public void TakePlayerDamage()
     {
-        print("UIMANAGER: Took Damage!");
         playerHearts[gameManager.playerHealth].gameObject.SetActive(false);
         //remove a heart
+    }
+
+    public void GameOver()
+    {
+        gameOverPanel.SetActive(true);
     }
 }

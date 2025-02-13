@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,7 +31,19 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        print("Game Over!");
-        //UI popup and scene reset imo
+        Character[] characters = FindObjectsOfType<Character>();
+        foreach (Character character in characters)
+        {
+            Destroy(character.gameObject);
+        }
+        UIManager.GameOver();
+    }
+    public void ResetScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void BackToMain()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }
