@@ -7,14 +7,6 @@ using UnityEngine.UIElements;
 public class Character : MonoBehaviour
 {
     public GameManager gameManager { get; private set; }
-    private CharacterController controller;
-    private Vector3 playerVelocity;
-    private Vector2 movementInput, aimInput;
-    private bool isAttacking, isAttacking2;
-    private int whatHandShouldAttack = 0;
-    private PlayerInput inputManager;
-    private float aimAngle;
-    private Animator animator;
     [SerializeField]
     public float playerSpeed = 2.0f;
     public Transform attackPoint;
@@ -23,6 +15,14 @@ public class Character : MonoBehaviour
     public float attackDelay;
     public int attackDamage;
     public float attackTimer;
+    public GameObject hitVFX;
+
+    private CharacterController controller;
+    private Vector2 movementInput, aimInput;
+    private int whatHandShouldAttack = 0;
+    private PlayerInput inputManager;
+    private float aimAngle;
+    private Animator animator;
 
     private void Start()
     {
@@ -135,9 +135,9 @@ public class Character : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print($"{other.gameObject.layer.ToString()}, {enemyLayers.value}");
         if (other.gameObject.layer == 6)
         {
+            Instantiate(hitVFX, this.transform);
             gameManager.TakePlayerDamage();
         }
     }

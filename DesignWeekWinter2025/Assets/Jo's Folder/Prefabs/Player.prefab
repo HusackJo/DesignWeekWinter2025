@@ -320,6 +320,7 @@ MonoBehaviour:
   attackDelay: 2
   attackDamage: 70
   attackTimer: 0
+  hitVFX: {fileID: 119183615461286708, guid: 141e1779869c79845bd243610f187f47, type: 3}
 --- !u!114 &2256322057060198467
 MonoBehaviour:
   m_ObjectHideFlags: 0
