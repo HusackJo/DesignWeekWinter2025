@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
 {
+    public GameManager gameManager { get; private set; }
     private CharacterController controller;
     private Vector3 playerVelocity;
     private Vector2 movementInput, aimInput;
@@ -30,6 +31,7 @@ public class Character : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         UIManager uIManager = FindObjectOfType<UIManager>().GetComponent<UIManager>();
         uIManager.SpawnCharacterUI(this);
+        gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
 
     void Update()
@@ -106,8 +108,8 @@ public class Character : MonoBehaviour
 
     private void AttackHitboxTrigger()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
-        foreach (Collider2D enemy in hitEnemies)
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRadius, enemyLayers);
+        foreach (Collider enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
         }
@@ -129,6 +131,15 @@ public class Character : MonoBehaviour
     public void OnAim(InputAction.CallbackContext context)
     {
         aimInput = context.ReadValue<Vector2>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        print($"{other.gameObject.layer.ToString()}, {enemyLayers.value}");
+        if (other.gameObject.layer == 6)
+        {
+            gameManager.TakePlayerDamage();
+        }
     }
 
     private void OnDrawGizmos()

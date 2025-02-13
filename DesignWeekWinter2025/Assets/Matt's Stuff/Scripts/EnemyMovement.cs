@@ -13,7 +13,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField]
     private float _screenBorder;
 
-    private Rigidbody2D _rigidbody;
+    private Rigidbody _rigidbody;
     private PlayerAwarenesscController _playerAwarenessController;
     private Vector2 _targetDirection;
     private float _changeDirectionCooldown;
@@ -21,7 +21,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody>();
         _playerAwarenessController = GetComponent<PlayerAwarenesscController>();
         _targetDirection = transform.up;
         _camera = Camera.main;
@@ -85,7 +85,7 @@ public class EnemyMovement : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(transform.forward, _targetDirection);
         Quaternion rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
 
-        _rigidbody.SetRotation(rotation);
+        _rigidbody.rotation = (rotation);
     }
 
     private void SetVelocity()

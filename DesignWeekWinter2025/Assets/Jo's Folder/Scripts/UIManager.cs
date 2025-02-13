@@ -6,10 +6,16 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    private GameManager gameManager;
     public GameObject characterUIRef;
     public Transform characterUIPanel;
-    private List<Character> characters;
-    private List<Slider> sliders;
+    private int characterCount;
+    public GameObject[] playerHearts;
+
+    //yknow what, game comes first. Scrapping this for now
+    //I think my problem is with Lists. I'd ask some friends for help, but the school's closed.
+    //private List<Character> characters;
+    //private List<Slider> sliders;
 
     //private void Update()
     //{
@@ -29,11 +35,39 @@ public class UIManager : MonoBehaviour
     //    }
     //}
 
+    private void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
+        characterCount = 0;
+    }
+
     public void SpawnCharacterUI(Character character)
     {
         GameObject newCharUI = Instantiate(characterUIRef, characterUIPanel);
+        characterCount++;
+
+            //fuck it we'll do it in the UI manager IDGAF at this point LOL
+        if (characterCount < 2)
+        {
+            gameManager.UpdatePlayerMaxHealth(3);
+            for (int i = 0; i < playerHearts.Length-1; i++)
+            {
+                playerHearts[i].gameObject.SetActive(true);
+            }
+        } else
+        {
+            playerHearts[3].gameObject.SetActive(true);
+            gameManager.UpdatePlayerMaxHealth(1);
+        }
+
         //sliders.Add(newCharUI.GetComponent<Slider>());
         //characters.Add(character);
-        //Debug.Log(sliders.ToString());
+    }
+
+    public void TakePlayerDamage()
+    {
+        print("UIMANAGER: Took Damage!");
+        playerHearts[gameManager.playerHealth].gameObject.SetActive(false);
+        //remove a heart
     }
 }
