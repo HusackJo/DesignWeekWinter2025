@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(CharacterController))]
 public class Character : MonoBehaviour
 {
-
     private CharacterController controller;
     private Vector3 playerVelocity;
     private Vector2 movementInput, aimInput;
@@ -14,18 +13,21 @@ public class Character : MonoBehaviour
     private int whatHandShouldAttack = 0;
     private PlayerInput inputManager;
     private float aimAngle;
+    private Animator animator;
     [SerializeField]
     public float playerSpeed = 2.0f;
     public Transform attackPoint;
     public float attackRadius;
     public LayerMask enemyLayers;
     public float attackDelay;
+    public int attackDamage;
     private float attacktimer;
 
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
         inputManager = gameObject.GetComponent<PlayerInput>();
+        animator = gameObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -79,25 +81,35 @@ public class Character : MonoBehaviour
 
     public void DoAttack(int whatHandAttacked)
     {
-        if (whatHandAttacked == whatHandShouldAttack || whatHandShouldAttack == 0)
+        if (Time.time >= attacktimer)
         {
-            if (Time.time >= attacktimer)
+            attacktimer = Time.time + 1f / attackDelay;
+
+            //select hand based on input
+            if (whatHandAttacked == whatHandShouldAttack || whatHandShouldAttack == 0)
             {
-                attacktimer = Time.time + 1f / attackDelay;
-                print($"did attack, {attacktimer}");
-                Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
-                foreach (Collider2D enemy in hitEnemies)
+                if (whatHandAttacked == 1)
                 {
-                    print($"we hit: {enemy.name}");
+                    animator.SetBool("DoAttack1", true);
+                    whatHandShouldAttack = 2;
                 }
+                else if (whatHandAttacked == 2)
+                {
+                    animator.SetBool("DoAttack1", false);
+                    whatHandShouldAttack = 1;
+                }
+                //plays animation with event AttackHitboxTrigger()
+                animator.SetTrigger("DoAttack");
             }
-            if (whatHandAttacked == 1)
-            {
-                whatHandShouldAttack = 2;
-            } else if (whatHandAttacked == 2)
-            {
-                whatHandShouldAttack = 1;
-            }
+        }
+    }
+
+    private void AttackHitboxTrigger()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRadius, enemyLayers);
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
         }
     }
 
