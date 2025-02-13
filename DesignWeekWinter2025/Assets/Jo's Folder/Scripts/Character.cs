@@ -43,21 +43,20 @@ public class Character : MonoBehaviour
 
         //
         Vector3 move = new Vector3(movementInput.x, movementInput.y, 0);
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        
 
         if (move.magnitude > 1)
         {
-            gameObject.transform.forward = move.normalized;
+            controller.Move(move.normalized * Time.deltaTime * playerSpeed);
         }
         else if (move != Vector3.zero)
         {
-            gameObject.transform.forward = move;
+            controller.Move(move * Time.deltaTime * playerSpeed);
         }
         else
         {
             //not moving
         }
-        controller.Move(playerVelocity * Time.deltaTime);
 
         //
 
@@ -83,11 +82,10 @@ public class Character : MonoBehaviour
     {
         if (Time.time >= attacktimer)
         {
-            attacktimer = Time.time + 1f / attackDelay;
-
             //select hand based on input
             if (whatHandAttacked == whatHandShouldAttack || whatHandShouldAttack == 0)
             {
+                attacktimer = Time.time + 1f / attackDelay;
                 if (whatHandAttacked == 1)
                 {
                     animator.SetBool("DoAttack1", true);
