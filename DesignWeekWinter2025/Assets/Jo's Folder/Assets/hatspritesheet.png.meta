@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e608089f72e2e33488415315916ea409
+guid: 53f26651bf1e9364c94b5ee684e09e7d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pantsspritesheet-Sheet_0
+      name: hatspritesheet_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 286
-        width: 58
-        height: 69
+        x: 24
+        y: 488
+        width: 45
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f809d15748db8c43bb9b18fdd91a16a
-      internalID: -516258342
+      spriteID: 02e6661e1c6e3c642b26516a6e7132eb
+      internalID: 49615157
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pantsspritesheet-Sheet_1
+      name: hatspritesheet_1
       rect:
         serializedVersion: 2
-        x: 121
-        y: 292
-        width: 98
-        height: 63
+        x: 98
+        y: 491
+        width: 36
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1faf7b19f3580db4db7a5b02a17f14ad
-      internalID: -1762498719
+      spriteID: b8604fcc8594e2a418c6e6e5c8772ecc
+      internalID: -517129106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pantsspritesheet-Sheet_2
+      name: hatspritesheet_2
       rect:
         serializedVersion: 2
-        x: 235
-        y: 295
-        width: 94
-        height: 62
+        x: 158
+        y: 490
+        width: 42
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8dd7b866f7110a4cbaa6b4b5c1a0b58
-      internalID: 1267908355
+      spriteID: 454a027f3c2db184dbbf1e5aae1e3a06
+      internalID: -1190941884
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pantsspritesheet-Sheet_3
+      name: hatspritesheet_3
       rect:
         serializedVersion: 2
-        x: 14
-        y: 199
-        width: 58
-        height: 69
+        x: 216
+        y: 492
+        width: 47
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 505398d63ffd7134bb5f160678a849c7
-      internalID: 58306170
+      spriteID: 5a3d5da6ac75d8c42857b62a70d25c64
+      internalID: 197819086
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pantsspritesheet-Sheet_4
+      name: hatspritesheet_4
       rect:
         serializedVersion: 2
-        x: 130
-        y: 200
-        width: 99
-        height: 63
+        x: 280
+        y: 487
+        width: 41
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,20 +195,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ce526ada9b6fd249841e1693024b808
-      internalID: 1984182308
+      spriteID: f157225d1bd329f478b3d8222811da57
+      internalID: -708231013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pantsspritesheet-Sheet_5
+      name: hatspritesheet_5
       rect:
         serializedVersion: 2
-        x: 244
-        y: 198
-        width: 95
-        height: 62
+        x: 336
+        y: 489
+        width: 38
+        height: 27
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,20 +216,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 304e259cc1f75d142aa362a139311c1f
-      internalID: -345199190
+      spriteID: 26a4b3e7c5370304fb6f0d1d1686e8d1
+      internalID: -1322648196
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pantsspritesheet-Sheet_6
+      name: hatspritesheet_6
       rect:
         serializedVersion: 2
-        x: 126
-        y: 127
-        width: 98
-        height: 63
+        x: 392
+        y: 488
+        width: 43
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,20 +237,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4c43aed2db9ce44e8b1fec14d57811f
-      internalID: -670731809
+      spriteID: 59db42c809d5a6f49918378eb2063c70
+      internalID: 1190266287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pantsspritesheet-Sheet_7
+      name: hatspritesheet_7
       rect:
         serializedVersion: 2
-        x: 244
-        y: 129
-        width: 93
-        height: 62
+        x: 446
+        y: 490
+        width: 49
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,50 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75791145787edc541b68c70d91422d1d
-      internalID: -1025359632
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pantsspritesheet-Sheet_8
-      rect:
-        serializedVersion: 2
-        x: 131
-        y: 53
-        width: 95
-        height: 62
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d989e825826e34049bb836133c1c364d
-      internalID: -2040037097
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pantsspritesheet-Sheet_9
-      rect:
-        serializedVersion: 2
-        x: 236
-        y: 53
-        width: 98
-        height: 63
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c5504f4b7a15c594498dabf655a7c1bc
-      internalID: -2125264630
+      spriteID: 3ed1c66d2c2e9734f942efd11cf36e92
+      internalID: 1687489863
       vertices: []
       indices: 
       edges: []
@@ -317,16 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pantsspritesheet-Sheet_0: -516258342
-      pantsspritesheet-Sheet_1: -1762498719
-      pantsspritesheet-Sheet_2: 1267908355
-      pantsspritesheet-Sheet_3: 58306170
-      pantsspritesheet-Sheet_4: 1984182308
-      pantsspritesheet-Sheet_5: -345199190
-      pantsspritesheet-Sheet_6: -670731809
-      pantsspritesheet-Sheet_7: -1025359632
-      pantsspritesheet-Sheet_8: -2040037097
-      pantsspritesheet-Sheet_9: -2125264630
+      hatspritesheet_0: 49615157
+      hatspritesheet_1: -517129106
+      hatspritesheet_2: -1190941884
+      hatspritesheet_3: 197819086
+      hatspritesheet_4: -708231013
+      hatspritesheet_5: -1322648196
+      hatspritesheet_6: 1190266287
+      hatspritesheet_7: 1687489863
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

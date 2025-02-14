@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public MultiplayerCamera mainCamera;
+    public GameObject playerManager, spawners;
     private UIManager UIManager;
     public int playerHealth;
     private int playerHealthMax;
@@ -29,6 +31,10 @@ public class GameManager : MonoBehaviour
         playerHealthMax += amount;
         playerHealth = playerHealthMax;
     }
+    public void AddPlayerToCamera(Character char2add)
+    {
+        mainCamera.AddTargetToCamera(char2add.gameObject.transform);
+    }
     public void GameOver()
     {
         Character[] characters = FindObjectsOfType<Character>();
@@ -37,6 +43,8 @@ public class GameManager : MonoBehaviour
             Destroy(character.gameObject);
         }
         UIManager.GameOver();
+        Destroy(playerManager);
+        Destroy(spawners);
     }
     public void ResetScene()
     {

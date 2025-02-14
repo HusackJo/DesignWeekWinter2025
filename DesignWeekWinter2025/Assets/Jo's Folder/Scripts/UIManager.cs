@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
     {
         GameObject newCharUI = Instantiate(characterUIRef, characterUIPanel);
         characterCount++;
-
+        gameManager.AddPlayerToCamera(character);
             //fuck it we'll do it in the UI manager IDGAF at this point LOL
         if (characterCount < 2)
         {

@@ -18,6 +18,7 @@ public class PlayerAwarenesscController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //I don't wanna puzzle out how to get rid of this error. It's stickin.
         if (_player == null)
         {
             _player = GameObject.FindGameObjectWithTag("Player").transform;
